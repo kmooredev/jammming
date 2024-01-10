@@ -3,6 +3,7 @@ import { useState } from 'react'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
 import Playlist from './components/Playlist/Playlist'
+import { TrackProps } from './components/Track/Track'
 
 function App() {
 
@@ -45,14 +46,24 @@ function App() {
     }
   ])
 
-  const [playlistName, ] = useState('');
+  const [playlistName, setPlaylistName] = useState('');
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPlaylistName(event.target.value);
+    console.log(playlistName);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleAddTrack = (track: TrackProps) => {
+    console.log(track);
+  }
 
   return (
     <div className='container'>
       <SearchBar />
       <div className='main'>
-        <SearchResults searchResults={results}/>
-        <Playlist name={playlistName} tracks={playlistTracks}/>
+        <SearchResults searchResults={results} handleAddTrack={handleAddTrack}/>
+        <Playlist name={playlistName} tracks={playlistTracks} handleNameChange={handleNameChange}  />
       </div>
     </div>
   )

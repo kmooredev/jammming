@@ -1,6 +1,6 @@
 const SaveButton: React.FC = () => {
   return (
-    <button style={{ alignSelf: 'center', width: '8rem', fontSize: '0.8rem', marginTop: '0.5rem', padding: '5%'}}>Save to Spotify</button>
+    <button style={{ width: '60%', alignSelf: 'center'}}>Save to Spotify</button>
   )
 }
 
