@@ -4,7 +4,6 @@ import Tracklist from "../Tracklist/Tracklist";
 import styles from './Playlist.module.css';
 
 const Playlist: React.FC = () => {
-  const [playlistName, setPlaylistName] = useState('My Playlist');
   const [playlistTracks, ] = useState([
     {
       id: '1',
@@ -25,17 +24,12 @@ const Playlist: React.FC = () => {
       album: 'Album 3'
     }
   ])
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPlaylistName(event.target.value);
-  }
   
     return (
-    <div className={styles.playlist}>
-      <input type="text" value={playlistName} onChange={handleNameChange}/>
-      <Tracklist kind='playlist' tracks={playlistTracks}/>
-      <SaveButton />
-    </div>
+      <div className={styles.playlist}>
+        <Tracklist listType='playlist' tracks={playlistTracks}/>
+        <SaveButton />
+      </div>
   );
 }
 

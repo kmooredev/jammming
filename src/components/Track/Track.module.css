@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-bottom: 2px solid slateblue;
+}
+
+.container:hover {
+  zoom: 1.2;
+}
+
+.container:last-of-type {
+  border-bottom: none;
+}
+
+.trackName {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.detailsContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  padding-left: 2%;
+}
+
+.trackDetails {
+  font-weight: lighter;
+  padding: 1%;
+  margin: 0;
+}
+
+.button {
+  align-self: center;
+}

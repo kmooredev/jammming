@@ -1,5 +1,5 @@
 import Tracklist from "../Tracklist/Tracklist"
-import { TrackProps } from "../Track"
+import { TrackProps } from "../Track/Track"
 import styles from './SearchResults.module.css'
 
 interface SearchResultsProps {
@@ -10,7 +10,7 @@ const SearchResults = ({searchResults}: SearchResultsProps) => {
 
   return (
     <div className={styles.results}>
-      <Tracklist kind='results' tracks={searchResults}/>
+      <Tracklist listType='results' tracks={searchResults}/>
     </div>
   )
 }

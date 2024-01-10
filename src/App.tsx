@@ -6,7 +6,7 @@ import Playlist from './components/Playlist/Playlist'
 
 function App() {
 
-  const [tracks, ] = useState([{
+  const [results, ] = useState([{
     id: '1',
     name: 'Track 1',
     artist: 'Artist 1',
@@ -29,7 +29,7 @@ function App() {
     <div className='container'>
       <SearchBar />
       <div className='main'>
-        <SearchResults searchResults={tracks}/>
+        <SearchResults searchResults={results}/>
         <Playlist />
       </div>
     </div>
