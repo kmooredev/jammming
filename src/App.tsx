@@ -1,8 +1,8 @@
 import './App.css'
 import { useState } from 'react'
-import SearchBar from './components/SearchBar'
-import SearchResults from './components/SearchResults'
-import Playlist from './components/Playlist'
+import SearchBar from './components/SearchBar/SearchBar'
+import SearchResults from './components/SearchResults/SearchResults'
+import Playlist from './components/Playlist/Playlist'
 
 function App() {
 
@@ -26,9 +26,9 @@ function App() {
   }]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <div className='container'>
       <SearchBar />
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', width: '80vw', maxHeight: '100vh', padding: '1%'}}>
+      <div className='main'>
         <SearchResults searchResults={tracks}/>
         <Playlist />
       </div>

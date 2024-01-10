@@ -1,13 +1,14 @@
-import Track, { TrackProps} from "./Track"
+import Track, { TrackProps} from "../Track"
+import styles from './Tracklist.module.css';
 
 export interface TracklistProps {
   tracks: TrackProps[],
-  styles?: React.CSSProperties
+  kind?: string
 }
 
-const Tracklist = ({tracks} :TracklistProps) => {
+const Tracklist = ({tracks, kind} :TracklistProps) => {
   return (
-    <div>
+    <div className={kind === 'playlist' ? styles.playlistTracklist : styles.tracklist}>
       {tracks.map(track => {
         return <Track name={track.name} artist={track.artist} album={track.album} id={track.id}/>
       })}
