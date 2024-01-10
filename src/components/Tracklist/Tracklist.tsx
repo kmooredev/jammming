@@ -12,7 +12,7 @@ const Tracklist = ({tracks, listType, handleAddTrack, handleRemoveTrack} :Trackl
   return (
     <div className={listType === 'playlist' ? styles.playlistTracklist : styles.tracklist}>
       {tracks.map(track => {
-        return <Track name={track.name} artist={track.artist} album={track.album} key={track.id} id={track.id} listType={listType} handleAddTrack={handleAddTrack} handleRemoveTrack={handleRemoveTrack}/>
+        return <Track name={track.name} artist={track.artist} album={track.album} key={track.id} id={track.id} uri={track.uri} listType={listType} handleAddTrack={handleAddTrack} handleRemoveTrack={handleRemoveTrack}/>
       })}
     </div>
   )

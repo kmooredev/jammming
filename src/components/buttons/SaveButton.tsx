@@ -1,6 +1,10 @@
-const SaveButton: React.FC = () => {
+interface SaveButtonProps {
+  handleSavePlaylist: () => void;
+}
+
+const SaveButton = ({handleSavePlaylist}: SaveButtonProps) => {
   return (
-    <button style={{ width: '60%', alignSelf: 'center'}}>Save to Spotify</button>
+    <button style={{ width: '60%', alignSelf: 'center'}} onClick={handleSavePlaylist}>Save to Spotify</button>
   )
 }
 

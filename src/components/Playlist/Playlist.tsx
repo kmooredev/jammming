@@ -8,14 +8,15 @@ interface PlaylistProps {
   tracks: Array<TrackProps>;
   handleNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleRemoveTrack: (track: TrackProps) => void;
+  handleSavePlaylist: () => void;
 }
 
-const Playlist = ({ name, tracks, handleNameChange, handleRemoveTrack }:PlaylistProps)  => {
+const Playlist = ({ name, tracks, handleNameChange, handleRemoveTrack, handleSavePlaylist }:PlaylistProps)  => {
     return (
       <div className={styles.playlist}>
         <Tracklist listType='playlist' tracks={tracks} handleRemoveTrack={handleRemoveTrack} />
         <input className={styles.input} type="text" value={name} placeholder="playlist name..." onChange={handleNameChange}/>
-        <SaveButton />
+        <SaveButton handleSavePlaylist={handleSavePlaylist} />
       </div>
   );
 }

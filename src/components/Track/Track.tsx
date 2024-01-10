@@ -6,6 +6,7 @@ export type TrackType = {
   artist: string;
   album: string;
   id: string;
+  uri: string;
 }
 
 export interface TrackProps {
@@ -13,14 +14,15 @@ export interface TrackProps {
   artist: string;
   album: string;
   id: string;
+  uri: string;
   listType?: string;
   key?: string;
   handleAddTrack?: (track: TrackType) => void;
   handleRemoveTrack?: (track: TrackType) => void;
 }
 
-const Track = ({name, artist, album, id, listType, handleAddTrack, handleRemoveTrack}: TrackProps) => {
-  const track = {name: name, artist: artist, album: album, id: id, key: id};
+const Track = ({name, artist, album, id, uri, listType, handleAddTrack, handleRemoveTrack}: TrackProps) => {
+  const track = {name: name, artist: artist, album: album, id: id, key: id, uri: uri};
   return (
     <div className={styles.container} key={id}>
       <p className={styles.trackName}>{name}</p>
