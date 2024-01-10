@@ -3,11 +3,11 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  border-bottom: 2px solid slateblue;
+  border-bottom: 2px solid #cfb9f0;
 }
 
 .container:hover {
-  zoom: 1.2;
+  color: gold;
 }
 
 .container:last-of-type {
@@ -26,6 +26,7 @@
   width: 100%;
   justify-content: space-evenly;
   padding-left: 2%;
+  color: white;
 }
 
 .trackDetails {
@@ -34,6 +35,20 @@
   margin: 0;
 }
 
-.button {
+.addButton {
   align-self: center;
+  color: white;
+}
+
+.addButton:hover {
+  color: rgb(13, 203, 13);
+}
+
+.removeButton {
+  align-self: center;
+  color: white;
+}
+
+.removeButton:hover {
+  color: rgba(250, 52, 52, 0.771); 
 }

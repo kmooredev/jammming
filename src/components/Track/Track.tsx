@@ -16,7 +16,7 @@ const Track = ({name, artist, album, id, listType}: TrackProps) => {
       <div className={styles.detailsContainer}>
         <p className={styles.trackDetails}>{album}</p>
         <p className={styles.trackDetails}>{artist}</p>
-        {listType === 'results' ? <IoAddCircle className={styles.button}/> : <IoRemoveCircle className={styles.button}/>}
+        {listType === 'results' ? <IoAddCircle className={styles.addButton}/> : <IoRemoveCircle className={styles.removeButton}/>}
       </div>
     </div>
   )
