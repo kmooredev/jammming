@@ -1,10 +1,10 @@
-import Track, { TrackProps} from "../Track/Track"
+import Track, { TrackProps, TrackType } from "../Track/Track"
 import styles from './Tracklist.module.css';
 
 export interface TracklistProps {
   tracks: TrackProps[],
   listType?: string,
-  handleAddTrack?: (track: TrackProps) => void
+  handleAddTrack?: (track: TrackType) => void
 }
 
 const Tracklist = ({tracks, listType, handleAddTrack} :TracklistProps) => {

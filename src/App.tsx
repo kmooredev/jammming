@@ -3,7 +3,7 @@ import { useState } from 'react'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
 import Playlist from './components/Playlist/Playlist'
-import { TrackProps } from './components/Track/Track'
+import { TrackType } from './components/Track/Track'
 
 function App() {
 
@@ -25,7 +25,7 @@ function App() {
     artist: 'Artist 3',
     album: 'Album 3'
   }]);
-  const [playlistTracks, ] = useState([
+  const [playlistTracks, setPlaylistTracks] = useState([
     {
       id: '4',
       name: 'Track 4',
@@ -53,9 +53,9 @@ function App() {
     console.log(playlistName);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleAddTrack = (track: TrackProps) => {
-    console.log(track);
+  const handleAddTrack = (track: TrackType) => {
+    const newTrack = track;
+    setPlaylistTracks([...playlistTracks, newTrack]);
   }
 
   return (

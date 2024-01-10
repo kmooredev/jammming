@@ -1,10 +1,10 @@
 import Tracklist from "../Tracklist/Tracklist"
-import { TrackProps } from "../Track/Track"
+import { TrackProps, TrackType } from "../Track/Track"
 import styles from './SearchResults.module.css'
 
 interface SearchResultsProps {
   searchResults: TrackProps[]
-  handleAddTrack: (track: TrackProps) => void
+  handleAddTrack: (track: TrackType) => void
 }
 
 const SearchResults = ({searchResults, handleAddTrack}: SearchResultsProps) => {
