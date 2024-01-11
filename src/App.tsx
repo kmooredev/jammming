@@ -1,12 +1,12 @@
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
 import Playlist from './components/Playlist/Playlist'
 import { TrackType } from './components/Track/Track'
+import getAccessToken from './utils/getAccessToken'
 
 function App() {
-
   const [results, ] = useState([{
     id: '1',
     name: 'Track 1',
@@ -58,6 +58,7 @@ function App() {
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlaylistName(event.target.value);
+    console.log(accessToken)
   }
 
   const handleAddTrack = (track: TrackType) => {
@@ -74,6 +75,15 @@ function App() {
     const playlistUriArray = playlistTracks.map(track => track.uri);
     setPlaylistUriArray(playlistUriArray);
   }
+
+  const [accessToken, setAccessToken] = useState<string>('');
+  useEffect(() => {
+    async function getAccessTokenAsync() {
+      const accessToken = await getAccessToken();
+      setAccessToken(accessToken);
+    }
+    getAccessTokenAsync();
+  }, [])
 
   console.log(playlistUriArray)
 
