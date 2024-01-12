@@ -1,19 +1,25 @@
-import Tracklist from "../Tracklist/Tracklist"
-import { TrackProps, TrackType } from "../Track/Track"
-import styles from './SearchResults.module.css'
+import Tracklist from '../Tracklist/Tracklist';
+import { TrackProps, TrackType } from '../Track/Track';
+import styles from './SearchResults.module.css';
 
 interface SearchResultsProps {
-  searchResults: TrackProps[]
-  handleAddTrack: (track: TrackType) => void
+  searchResults: TrackProps[];
+  handleAddTrack: (track: TrackType) => void;
 }
 
-const SearchResults = ({searchResults, handleAddTrack}: SearchResultsProps) => {
-
+const SearchResults = ({
+  searchResults,
+  handleAddTrack,
+}: SearchResultsProps) => {
   return (
     <div className={styles.results}>
-      <Tracklist listType='results' tracks={searchResults} handleAddTrack={handleAddTrack}/>
+      <Tracklist
+        listType="results"
+        tracks={searchResults}
+        handleAddTrack={handleAddTrack}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default SearchResults;
