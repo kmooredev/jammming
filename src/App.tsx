@@ -4,6 +4,9 @@ import SearchBar from './components/SearchBar/SearchBar';
 import SearchResults from './components/SearchResults/SearchResults';
 import Playlist from './components/Playlist/Playlist';
 import { TrackType } from './components/Track/Track';
+import getId from './utils/getId';
+import addTracks from './utils/addTracks';
+import createPlaylist from './utils/createPlaylist';
 
 interface Item {
   artists: {
@@ -23,7 +26,17 @@ function App() {
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
   const REDIRECT_URI = 'http://localhost:5173';
   const RESPONSE_TYPE = 'token';
+  const scopes = [
+    'user-read-private',
+    'user-read-email',
+    'playlist-modify-public',
+    'playlist-modify-private',
+    'playlist-read-private',
+    'playlist-read-collaborative',
+    'user-top-read',
+  ];
   const [accessToken, setAccessToken] = useState<string>('');
+  const [userId, setUserId] = useState('');
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem('token');
@@ -39,6 +52,12 @@ function App() {
       window.localStorage.setItem('token', token);
       setAccessToken(token);
     }
+
+    const fetchUserId = async () => {
+      const id = await getId();
+      setUserId(id);
+    };
+    fetchUserId();
   }, []);
 
   const logout = () => {
@@ -47,15 +66,7 @@ function App() {
   };
 
   // Search Results Logic
-  const [results, setResults] = useState([
-    {
-      id: '1',
-      name: 'Track 1',
-      artist: 'Artist 1',
-      album: 'Album 1',
-      uri: 'spotify:track:6rqhFgbbKwnb9MLmUQDhG6',
-    },
-  ]);
+  const [results, setResults] = useState([]);
 
   // Search Bar Logic
   const [query, setQuery] = useState('');
@@ -87,19 +98,16 @@ function App() {
   };
 
   // Playlist Logic
-  const [playlistTracks, setPlaylistTracks] = useState([
-    {
-      id: '4',
-      name: 'Track 4',
-      artist: 'Artist 4',
-      album: 'Album 4',
-      uri: 'spotify:track:9rqhFgbbKwnb9MLmUQDhG6',
-    },
-  ]);
+  const [playlistName, setPlaylistName] = useState('');
+  const [playlistTracks, setPlaylistTracks] = useState<TrackType[]>([]);
+  const [playlistId, setPlaylistId] = useState('');
+  const [playlistUriArray, setPlaylistUriArray] = useState<string[]>([]);
+
   const handleAddTrack = (track: TrackType) => {
     const newTrack = track;
     setPlaylistTracks([...playlistTracks, newTrack]);
   };
+
   const handleRemoveTrack = (track: TrackType) => {
     const newPlaylistTracks = playlistTracks.filter(
       (playlistTrack) => playlistTrack.id !== track.id
@@ -107,18 +115,14 @@ function App() {
     setPlaylistTracks(newPlaylistTracks);
   };
 
-  const [playlistUriArray, setPlaylistUriArray] = useState<string[]>([]);
-
   const handleSavePlaylist = () => {
-    const playlistUriArray = playlistTracks.map((track) => track.uri);
-    setPlaylistUriArray(playlistUriArray);
+    const playlistUris = playlistTracks.map((track) => track.uri);
+    setPlaylistUriArray(playlistUris);
+    createPlaylist(userId, accessToken, playlistName, setPlaylistId).then(() =>
+      addTracks(playlistId, accessToken, playlistUriArray)
+    );
   };
 
-  if (playlistUriArray.length > 0) {
-    console.log(playlistUriArray);
-  }
-
-  const [playlistName, setPlaylistName] = useState('');
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlaylistName(event.target.value);
   };
@@ -127,7 +131,9 @@ function App() {
     <div className="container">
       {!accessToken ? (
         <a
-          href={`${authEndpoint}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
+          href={`${authEndpoint}?client_id=${CLIENT_ID}&scope=${scopes.join(
+            ' '
+          )}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
         >
           Login to Spotify
         </a>
