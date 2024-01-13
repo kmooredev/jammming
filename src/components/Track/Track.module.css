@@ -52,3 +52,26 @@
 .removeButton:hover {
   color: rgba(250, 52, 52, 0.771);
 }
+
+@media screen and (max-width: 320px) {
+  .detailsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .trackDetails {
+    padding: 0;
+  }
+
+  .addButton {
+    margin-bottom: 2%;
+    align-self: flex-end;
+    padding-right: 5%;
+  }
+
+  .removeButton {
+    margin-bottom: 2%;
+    align-self: flex-end;
+    padding-right: 5%;
+  }
+}

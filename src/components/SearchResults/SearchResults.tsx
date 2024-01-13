@@ -13,6 +13,7 @@ const SearchResults = ({
 }: SearchResultsProps) => {
   return (
     <div className={styles.results}>
+      <h3>Search Results</h3>
       <Tracklist
         listType="results"
         tracks={searchResults}

@@ -7,6 +7,7 @@ import { TrackType } from './components/Track/Track';
 import getId from './utils/getId';
 import addTracks from './utils/addTracks';
 import createPlaylist from './utils/createPlaylist';
+import Header from './components/header/Header';
 
 interface Item {
   artists: {
@@ -22,19 +23,7 @@ interface Item {
 
 function App() {
   // auth logic
-  const authEndpoint = 'https://accounts.spotify.com/authorize';
-  const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-  const REDIRECT_URI = 'http://localhost:5173';
-  const RESPONSE_TYPE = 'token';
-  const scopes = [
-    'user-read-private',
-    'user-read-email',
-    'playlist-modify-public',
-    'playlist-modify-private',
-    'playlist-read-private',
-    'playlist-read-collaborative',
-    'user-top-read',
-  ];
+
   const [accessToken, setAccessToken] = useState<string>('');
   const [userId, setUserId] = useState('');
   useEffect(() => {
@@ -54,11 +43,19 @@ function App() {
     }
 
     const fetchUserId = async () => {
-      const id = await getId();
-      setUserId(id);
+      if (!accessToken) return;
+      try {
+        const id = await getId();
+        setUserId(id);
+        if (!id) {
+          throw new Error('There was an issue obtaining the user ID');
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchUserId();
-  }, []);
+  }, [accessToken]);
 
   const logout = () => {
     window.localStorage.removeItem('token');
@@ -74,27 +71,38 @@ function App() {
     setQuery(event.target.value);
   };
   const handleSearch = async () => {
-    const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${query}&type=track`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${query}&type=track`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          'There was an issue with the search request' +
+            `Status: ${response.status}`
+        );
       }
-    );
-    const data = await response.json();
-    const items = data.tracks.items;
-    const results = items.map((item: Item) => {
-      return {
-        name: item.name,
-        artist: item.artists[0].name,
-        album: item.album.name,
-        id: item.id,
-        uri: item.uri,
-      };
-    });
-    setResults(results);
-    return results;
+      const data = await response.json();
+      const items = data.tracks.items;
+      const results = items.map((item: Item) => {
+        return {
+          name: item.name,
+          artist: item.artists[0].name,
+          album: item.album.name,
+          id: item.id,
+          uri: item.uri,
+        };
+      });
+      setResults(results);
+      return results;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Playlist Logic
@@ -129,17 +137,7 @@ function App() {
 
   return (
     <div className="container">
-      {!accessToken ? (
-        <a
-          href={`${authEndpoint}?client_id=${CLIENT_ID}&scope=${scopes.join(
-            ' '
-          )}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-        >
-          Login to Spotify
-        </a>
-      ) : (
-        <button onClick={logout}>Logout</button>
-      )}
+      <Header accessToken={accessToken} logout={logout} />
       <SearchBar
         query={query}
         handleQueryChange={handleQueryChange}

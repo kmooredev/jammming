@@ -20,18 +20,20 @@ const Playlist = ({
 }: PlaylistProps) => {
   return (
     <div className={styles.playlist}>
-      <Tracklist
-        listType="playlist"
-        tracks={tracks}
-        handleRemoveTrack={handleRemoveTrack}
-      />
       <input
         className={styles.input}
         type="text"
         value={name}
-        placeholder="playlist name..."
+        placeholder="Name your playlist here"
         onChange={handleNameChange}
       />
+      {tracks.length > 0 && (
+        <Tracklist
+          listType="playlist"
+          tracks={tracks}
+          handleRemoveTrack={handleRemoveTrack}
+        />
+      )}
       <SaveButton handleSavePlaylist={handleSavePlaylist} />
     </div>
   );

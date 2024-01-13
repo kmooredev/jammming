@@ -5,7 +5,7 @@ interface SaveButtonProps {
 const SaveButton = ({ handleSavePlaylist }: SaveButtonProps) => {
   return (
     <button
-      style={{ width: '60%', alignSelf: 'center' }}
+      style={{ minWidth: '60%', alignSelf: 'center', marginTop: '1rem' }}
       onClick={handleSavePlaylist}
     >
       Save to Spotify

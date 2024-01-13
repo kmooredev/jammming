@@ -8,6 +8,7 @@
 }
 
 .input {
+  margin-top: 5%;
   width: 100%;
   align-self: center;
   border: none;
@@ -15,4 +16,10 @@
   font-size: 1.25rem;
   height: 1.5rem;
   text-align: center;
+}
+
+@media screen and (max-width: 320px) {
+  .playlist {
+    width: 100%;
+  }
 }
