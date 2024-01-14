@@ -9,6 +9,7 @@ interface PlaylistProps {
   handleNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleRemoveTrack: (track: TrackProps) => void;
   handleSavePlaylist: () => void;
+  handleSaveTracksToPlaylist: () => void;
 }
 
 const Playlist = ({
@@ -17,17 +18,26 @@ const Playlist = ({
   handleNameChange,
   handleRemoveTrack,
   handleSavePlaylist,
+  handleSaveTracksToPlaylist,
 }: PlaylistProps) => {
   return (
     <div className={styles.playlist}>
       <h3>Create A Playlist</h3>
-      <input
-        className={styles.input}
-        type="text"
-        value={name}
-        placeholder="Name your playlist here"
-        onChange={handleNameChange}
-      />
+      <div className={styles.playlist__name}>
+        <input
+          className={styles.input}
+          type="text"
+          value={name}
+          placeholder="Name your playlist here"
+          onChange={handleNameChange}
+        />
+        <button
+          className={styles.playlist__saveButton}
+          onClick={handleSavePlaylist}
+        >
+          Create Playlist
+        </button>
+      </div>
       {tracks.length > 0 ? (
         <Tracklist
           listType="playlist"
@@ -39,7 +49,7 @@ const Playlist = ({
           Add tracks from the search results to create a playlist
         </p>
       )}
-      <SaveButton handleSavePlaylist={handleSavePlaylist} />
+      <SaveButton handleSaveTracksToPlaylist={handleSaveTracksToPlaylist} />
     </div>
   );
 };

@@ -155,7 +155,14 @@ function App() {
 
   const handleAddTrack = (track: TrackType) => {
     const newTrack = track;
-    setPlaylistTracks([...playlistTracks, newTrack]);
+    setPlaylistTracks((prevTracks) => {
+      if (prevTracks.find((t) => t.id === track.id)) {
+        return prevTracks;
+      }
+      return [...playlistTracks, newTrack];
+    });
+    const playlistUris = playlistTracks.map((track) => track.uri);
+    setPlaylistUriArray(playlistUris);
   };
 
   const handleRemoveTrack = (track: TrackType) => {
@@ -166,11 +173,11 @@ function App() {
   };
 
   const handleSavePlaylist = () => {
-    const playlistUris = playlistTracks.map((track) => track.uri);
-    setPlaylistUriArray(playlistUris);
-    createPlaylist(userId.id, accessToken, playlistName, setPlaylistId).then(
-      () => addTracks(playlistId, accessToken, playlistUriArray)
-    );
+    createPlaylist(userId.id, accessToken, playlistName, setPlaylistId);
+  };
+
+  const handleSaveTracksToPlaylist = () => {
+    addTracks(playlistId, accessToken, playlistUriArray);
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -199,6 +206,7 @@ function App() {
               handleNameChange={handleNameChange}
               handleRemoveTrack={handleRemoveTrack}
               handleSavePlaylist={handleSavePlaylist}
+              handleSaveTracksToPlaylist={handleSaveTracksToPlaylist}
             />
           </div>
         </>
