@@ -20,6 +20,7 @@ const Playlist = ({
 }: PlaylistProps) => {
   return (
     <div className={styles.playlist}>
+      <h3>Create A Playlist</h3>
       <input
         className={styles.input}
         type="text"
@@ -27,12 +28,16 @@ const Playlist = ({
         placeholder="Name your playlist here"
         onChange={handleNameChange}
       />
-      {tracks.length > 0 && (
+      {tracks.length > 0 ? (
         <Tracklist
           listType="playlist"
           tracks={tracks}
           handleRemoveTrack={handleRemoveTrack}
         />
+      ) : (
+        <p className={styles.playlist__message}>
+          Add tracks from the search results to create a playlist
+        </p>
       )}
       <SaveButton handleSavePlaylist={handleSavePlaylist} />
     </div>

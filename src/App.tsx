@@ -8,6 +8,7 @@ import getId from './utils/getId';
 import addTracks from './utils/addTracks';
 import createPlaylist from './utils/createPlaylist';
 import Header from './components/header/Header';
+import Greeting from './components/greeting/Greeting';
 
 interface Item {
   artists: {
@@ -21,11 +22,33 @@ interface Item {
   uri: string;
 }
 
+interface UserId {
+  display_name: string;
+  email: string;
+  id: string;
+  images: {
+    height: number;
+    url: string;
+    width: number;
+  }[];
+}
+
 function App() {
   // auth logic
 
   const [accessToken, setAccessToken] = useState<string>('');
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState<UserId>({
+    display_name: '',
+    email: '',
+    id: '',
+    images: [
+      {
+        height: 0,
+        url: '',
+        width: 0,
+      },
+    ],
+  });
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem('token');
@@ -60,6 +83,25 @@ function App() {
   const logout = () => {
     window.localStorage.removeItem('token');
     setAccessToken('');
+    setUserId({
+      display_name: '',
+      email: '',
+      id: '',
+      images: [
+        {
+          height: 0,
+          url: '',
+          width: 0,
+        },
+      ],
+    });
+    setResults([]);
+    setPlaylistTracks([]);
+    setPlaylistUriArray([]);
+    setQuery('');
+    setPlaylistName('');
+    setPlaylistId('');
+    window.open('http://localhost:5173', '_self');
   };
 
   // Search Results Logic
@@ -126,8 +168,8 @@ function App() {
   const handleSavePlaylist = () => {
     const playlistUris = playlistTracks.map((track) => track.uri);
     setPlaylistUriArray(playlistUris);
-    createPlaylist(userId, accessToken, playlistName, setPlaylistId).then(() =>
-      addTracks(playlistId, accessToken, playlistUriArray)
+    createPlaylist(userId.id, accessToken, playlistName, setPlaylistId).then(
+      () => addTracks(playlistId, accessToken, playlistUriArray)
     );
   };
 
@@ -138,24 +180,29 @@ function App() {
   return (
     <div className="container">
       <Header accessToken={accessToken} logout={logout} />
-      <SearchBar
-        query={query}
-        handleQueryChange={handleQueryChange}
-        handleSearch={handleSearch}
-      />
-      <div className="main">
-        <SearchResults
-          searchResults={results}
-          handleAddTrack={handleAddTrack}
-        />
-        <Playlist
-          name={playlistName}
-          tracks={playlistTracks}
-          handleNameChange={handleNameChange}
-          handleRemoveTrack={handleRemoveTrack}
-          handleSavePlaylist={handleSavePlaylist}
-        />
-      </div>
+      <Greeting userId={userId} />
+      {accessToken && (
+        <>
+          <SearchBar
+            query={query}
+            handleQueryChange={handleQueryChange}
+            handleSearch={handleSearch}
+          />
+          <div className="main">
+            <SearchResults
+              searchResults={results}
+              handleAddTrack={handleAddTrack}
+            />
+            <Playlist
+              name={playlistName}
+              tracks={playlistTracks}
+              handleNameChange={handleNameChange}
+              handleRemoveTrack={handleRemoveTrack}
+              handleSavePlaylist={handleSavePlaylist}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

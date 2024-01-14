@@ -1,0 +1,24 @@
+.div {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.h1 {
+  font-size: 3rem;
+  color: #077493;
+}
+
+.p {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 450px) {
+  .h1 {
+    font-size: 2rem;
+  }
+
+  .p {
+    font-size: 1rem;
+  }
+}

@@ -23,21 +23,27 @@
 
 .detailsContainer {
   display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  padding-left: 2%;
+  width: 90%;
+  justify-content: space-between;
   color: white;
+  min-width: fit-content;
 }
 
 .trackDetails {
-  font-weight: lighter;
+  font-weight: light;
   padding: 1%;
   margin: 0;
+}
+
+.trackDetails__span {
+  font-weight: bold;
+  color: #4a139bd6;
 }
 
 .addButton {
   align-self: center;
   color: white;
+  min-width: 1rem;
 }
 
 .addButton:hover {
@@ -47,13 +53,14 @@
 .removeButton {
   align-self: center;
   color: white;
+  min-width: 1rem;
 }
 
 .removeButton:hover {
   color: rgba(250, 52, 52, 0.771);
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
   .detailsContainer {
     flex-direction: column;
     align-items: center;
@@ -61,6 +68,10 @@
 
   .trackDetails {
     padding: 0;
+  }
+
+  .trackName {
+    font-size: 1.2rem;
   }
 
   .addButton {

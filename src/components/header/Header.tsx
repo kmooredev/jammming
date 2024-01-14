@@ -23,16 +23,18 @@ const Header = ({ accessToken, logout }: HeaderProps) => {
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
-        <h1 className={styles.header__title}>Jammming</h1>
+        <h1 className={styles.header__title}>Jammming 🎶</h1>
         {!accessToken ? (
-          <a
-            className={styles.header__login}
-            href={`${authEndpoint}?client_id=${CLIENT_ID}&scope=${scopes.join(
-              ' '
-            )}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-          >
-            Login
-          </a>
+          <button>
+            <a
+              className={styles.header__login}
+              href={`${authEndpoint}?client_id=${CLIENT_ID}&scope=${scopes.join(
+                ' '
+              )}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
+            >
+              Login
+            </a>
+          </button>
         ) : (
           <button onClick={logout}>Logout</button>
         )}

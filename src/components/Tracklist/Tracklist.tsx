@@ -19,6 +19,9 @@ const Tracklist = ({
       className={
         listType === 'playlist' ? styles.playlistTracklist : styles.tracklist
       }
+      style={
+        tracks.length > 0 ? { border: '2px solid #cfb9f0' } : { border: 'none' }
+      }
     >
       {tracks.map((track) => {
         return (

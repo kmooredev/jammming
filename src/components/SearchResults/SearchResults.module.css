@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 40%;
+  margin-bottom: 1rem;
 }
 
 h3 {
@@ -12,7 +13,7 @@ h3 {
   margin: 0;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
   .results {
     width: 100%;
   }

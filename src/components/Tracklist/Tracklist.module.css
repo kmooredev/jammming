@@ -4,18 +4,16 @@
   justify-content: space-between;
   width: 100%;
   background: linear-gradient(135deg, #ff70a6, #3c8ce7); /* Gradient colors */
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   color: #fff; /* Text color on the lightbox */
   border-radius: 10px;
-  /* animation: rotateColors 10s infinite linear; Circular movement animation */
 }
 
 .playlistTracklist {
   display: flex;
   flex-direction: column;
   background: linear-gradient(135deg, #ff70a6, #3c8ce7); /* Gradient colors */
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   color: #fff; /* Text color on the lightbox */
   border-radius: 10px;
-  /* animation: rotateColors 10s infinite linear; Circular movement animation */
 }

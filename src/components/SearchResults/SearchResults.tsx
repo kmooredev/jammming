@@ -14,6 +14,9 @@ const SearchResults = ({
   return (
     <div className={styles.results}>
       <h3>Search Results</h3>
+      {searchResults.length === 0 && (
+        <p className={styles.results__message}>No results found</p>
+      )}
       <Tracklist
         listType="results"
         tracks={searchResults}

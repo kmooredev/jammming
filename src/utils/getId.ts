@@ -9,7 +9,7 @@ const getId = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return data.id;
+    return data;
   } catch (error) {
     console.log(error);
   }

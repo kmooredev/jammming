@@ -1,23 +1,34 @@
 .header {
-  border: 1px solid black;
   width: 100vw;
 }
 
 .header__container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 30%;
+  justify-content: space-between;
   align-items: center;
-  max-width: 780px;
+  width: 80vw;
   padding: 0 5%;
+  margin: 0 auto;
 }
 
 .header__title {
-  font-size: 1em;
+  font-size: 2em;
+  justify-self: center;
 }
 
 .header__login {
   align-self: center;
   text-decoration: none;
+  justify-self: right;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+}
+
+@media screen and (max-width: 450px) {
+  .header__container {
+    flex-direction: column;
+    align-items: center;
+  }
 }

@@ -41,10 +41,16 @@ const Track = ({
   };
   return (
     <div className={styles.container} key={id}>
-      <p className={styles.trackName}>{name}</p>
+      <p className={styles.trackName}>"{name}"</p>
       <div className={styles.detailsContainer}>
-        <p className={styles.trackDetails}>{album}</p>
-        <p className={styles.trackDetails}>{artist}</p>
+        <p className={styles.trackDetails}>
+          <span className={styles.trackDetails__span}>Album: </span>
+          {album}
+        </p>
+        <p className={styles.trackDetails}>
+          <span className={styles.trackDetails__span}>Artist: </span>
+          {artist}
+        </p>
         {listType === 'results' ? (
           <IoAddCircle
             onClick={() => handleAddTrack && handleAddTrack(track)}

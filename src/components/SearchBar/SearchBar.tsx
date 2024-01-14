@@ -13,6 +13,7 @@ const SearchBar = ({
 }: SearchBarProps) => {
   return (
     <div className={styles.div}>
+      <p className={styles.p}>Search for a song, artist, or album</p>
       <input
         className={styles.input}
         type="text"
