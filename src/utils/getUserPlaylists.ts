@@ -1,4 +1,4 @@
-interface Playlist {
+export interface Playlist {
   id: string;
   name: string;
   images: [{ url: string }];
@@ -6,7 +6,7 @@ interface Playlist {
   uri: string;
 }
 
-const getUserPlaylists = async () => {
+const getUserPlaylists = async (): Promise<Playlist[]> => {
   const response = await fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,

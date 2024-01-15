@@ -1,7 +1,7 @@
 import SaveButton from '../buttons/SaveButton';
 import { TrackProps } from '../Track/Track';
 import Tracklist from '../Tracklist/Tracklist';
-import styles from './Playlist.module.css';
+import styles from './CreatePlaylist.module.css';
 
 interface PlaylistProps {
   name: string;
@@ -12,7 +12,7 @@ interface PlaylistProps {
   handleSaveTracksToPlaylist: () => void;
 }
 
-const Playlist = ({
+const CreatePlaylist = ({
   name,
   tracks,
   handleNameChange,
@@ -54,4 +54,4 @@ const Playlist = ({
   );
 };
 
-export default Playlist;
+export default CreatePlaylist;

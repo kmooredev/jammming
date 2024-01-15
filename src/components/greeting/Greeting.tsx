@@ -4,12 +4,16 @@ interface GreetingProps {
   userId: {
     display_name: string;
   };
+  createPlaylist: () => void;
+  editPlaylist: () => void;
 }
 
-const Greeting = ({ userId }: GreetingProps) => {
+const Greeting = ({ userId, createPlaylist, editPlaylist }: GreetingProps) => {
   return userId.display_name ? (
     <div className={styles.div}>
       <h1 className={styles.h1}>Welcome, {userId.display_name}!</h1>
+      <button onClick={createPlaylist}>Create New Playlist</button>
+      <button onClick={editPlaylist}>Edit Existing Playlist</button>
     </div>
   ) : (
     <div className={styles.div}>

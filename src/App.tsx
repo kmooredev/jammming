@@ -2,13 +2,14 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
 import SearchResults from './components/SearchResults/SearchResults';
-import Playlist from './components/Playlist/Playlist';
+import CreatePlaylist from './components/CreatePlaylist/CreatePlaylist';
 import { TrackType } from './components/Track/Track';
 import getId from './utils/getId';
 import addTracks from './utils/addTracks';
 import createPlaylist from './utils/createPlaylist';
 import Header from './components/header/Header';
 import Greeting from './components/greeting/Greeting';
+import EditPlaylist from './components/EditPlaylist/EditPlaylist';
 
 interface Item {
   artists: {
@@ -152,6 +153,10 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState<TrackType[]>([]);
   const [playlistId, setPlaylistId] = useState('');
   const [playlistUriArray, setPlaylistUriArray] = useState<string[]>([]);
+  const [userWantsToCreatePlaylist, setUserWantsToCreatePlaylist] =
+    useState<boolean>(false);
+  const [userWantsToEditPlaylist, setUserWantsToEditPlaylist] =
+    useState<boolean>(false);
 
   const handleAddTrack = (track: TrackType) => {
     const newTrack = track;
@@ -184,10 +189,24 @@ function App() {
     setPlaylistName(event.target.value);
   };
 
+  const toggleCreatePlaylist = () => {
+    setUserWantsToEditPlaylist(false);
+    setUserWantsToCreatePlaylist(!userWantsToCreatePlaylist);
+  };
+
+  const toggleEditPlaylist = () => {
+    setUserWantsToCreatePlaylist(false);
+    setUserWantsToEditPlaylist(!userWantsToEditPlaylist);
+  };
+
   return (
     <div className="container">
       <Header accessToken={accessToken} logout={logout} />
-      <Greeting userId={userId} />
+      <Greeting
+        userId={userId}
+        createPlaylist={toggleCreatePlaylist}
+        editPlaylist={toggleEditPlaylist}
+      />
       {accessToken && (
         <>
           <SearchBar
@@ -200,14 +219,17 @@ function App() {
               searchResults={results}
               handleAddTrack={handleAddTrack}
             />
-            <Playlist
-              name={playlistName}
-              tracks={playlistTracks}
-              handleNameChange={handleNameChange}
-              handleRemoveTrack={handleRemoveTrack}
-              handleSavePlaylist={handleSavePlaylist}
-              handleSaveTracksToPlaylist={handleSaveTracksToPlaylist}
-            />
+            {userWantsToCreatePlaylist && (
+              <CreatePlaylist
+                name={playlistName}
+                tracks={playlistTracks}
+                handleNameChange={handleNameChange}
+                handleRemoveTrack={handleRemoveTrack}
+                handleSavePlaylist={handleSavePlaylist}
+                handleSaveTracksToPlaylist={handleSaveTracksToPlaylist}
+              />
+            )}
+            {userWantsToEditPlaylist && <EditPlaylist />}
           </div>
         </>
       )}
