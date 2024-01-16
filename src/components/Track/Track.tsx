@@ -19,6 +19,7 @@ export interface TrackProps {
   key?: string;
   handleAddTrack?: (track: TrackType) => void;
   handleRemoveTrack?: (track: TrackType) => void;
+  handleEditClick?: (trackUri: string) => void;
 }
 
 const Track = ({
@@ -30,6 +31,7 @@ const Track = ({
   listType,
   handleAddTrack,
   handleRemoveTrack,
+  handleEditClick,
 }: TrackProps) => {
   const track = {
     name: name,
@@ -55,6 +57,11 @@ const Track = ({
           <IoAddCircle
             onClick={() => handleAddTrack && handleAddTrack(track)}
             className={styles.addButton}
+          />
+        ) : listType === 'edit' ? (
+          <IoRemoveCircle
+            onClick={() => handleEditClick && handleEditClick(track.uri)}
+            className={styles.removeButton}
           />
         ) : (
           <IoRemoveCircle

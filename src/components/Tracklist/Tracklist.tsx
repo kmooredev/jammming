@@ -6,6 +6,7 @@ export interface TracklistProps {
   listType?: string;
   handleAddTrack?: (track: TrackType) => void;
   handleRemoveTrack?: (track: TrackType) => void;
+  handleEditClick?: (trackUri: string) => void;
 }
 
 const Tracklist = ({
@@ -13,11 +14,14 @@ const Tracklist = ({
   listType,
   handleAddTrack,
   handleRemoveTrack,
+  handleEditClick,
 }: TracklistProps) => {
   return (
     <div
       className={
-        listType === 'playlist' ? styles.playlistTracklist : styles.tracklist
+        listType === 'playlist' || listType === 'edit'
+          ? styles.playlistTracklist
+          : styles.tracklist
       }
       style={
         tracks.length > 0 ? { border: '2px solid #cfb9f0' } : { border: 'none' }
@@ -35,6 +39,7 @@ const Tracklist = ({
             listType={listType}
             handleAddTrack={handleAddTrack}
             handleRemoveTrack={handleRemoveTrack}
+            handleEditClick={handleEditClick}
           />
         );
       })}
