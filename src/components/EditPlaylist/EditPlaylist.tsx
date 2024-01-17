@@ -36,6 +36,7 @@ const EditPlaylist = () => {
     if (!itemToRemove) return;
     removePlaylistItem(selectedPlaylistId, itemToRemove)
       .then(() => {
+        setItemToRemove('');
         const tracks = getPlaylistTracks(selectedPlaylistId);
         return tracks;
       })
