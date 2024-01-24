@@ -182,7 +182,12 @@ function App() {
   };
 
   const handleSaveTracksToPlaylist = () => {
-    addTracks(playlistId, accessToken, playlistUriArray);
+    addTracks(playlistId, accessToken, playlistUriArray).then(() => {
+      setPlaylistTracks([]);
+      setPlaylistUriArray([]);
+      setPlaylistName('');
+      setPlaylistId('');
+    });
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -229,7 +234,13 @@ function App() {
                 handleSaveTracksToPlaylist={handleSaveTracksToPlaylist}
               />
             )}
-            {userWantsToEditPlaylist && <EditPlaylist />}
+            {userWantsToEditPlaylist && (
+              <EditPlaylist
+                tracksToAdd={playlistTracks}
+                handleRemoveTrack={handleRemoveTrack}
+                resetPlaylistTracks={setPlaylistTracks}
+              />
+            )}
           </div>
         </>
       )}

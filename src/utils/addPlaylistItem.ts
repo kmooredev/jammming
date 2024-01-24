@@ -1,4 +1,4 @@
-const addPlaylistItem = async (playlistId: string, trackUri: string) => {
+const addPlaylistItem = async (playlistId: string, trackUris: string[]) => {
   try {
     const response = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
@@ -9,7 +9,7 @@ const addPlaylistItem = async (playlistId: string, trackUri: string) => {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify({
-          uris: [trackUri],
+          uris: [...trackUris],
         }),
       }
     );

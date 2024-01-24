@@ -1,6 +1,7 @@
 .results {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   align-items: center;
   width: 40%;
   margin-bottom: 1rem;

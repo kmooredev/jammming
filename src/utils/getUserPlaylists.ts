@@ -20,7 +20,6 @@ const getUserPlaylists = async (): Promise<Playlist[]> => {
     const currentUserPlaylists = data.items.map((playlist: Playlist) => ({
       id: playlist.id,
       name: playlist.name,
-      image: playlist.images[0].url,
       snapshot_id: playlist.snapshot_id,
       uri: playlist.uri,
     }));
