@@ -8,7 +8,7 @@ interface HeaderProps {
 const Header = ({ accessToken, logout }: HeaderProps) => {
   const authEndpoint = 'https://accounts.spotify.com/authorize';
   const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-  const REDIRECT_URI = 'http://localhost:5173';
+  const REDIRECT_URI = 'https://jammming-sepia.vercel.app';
   const RESPONSE_TYPE = 'token';
   const scopes = [
     'user-read-private',
