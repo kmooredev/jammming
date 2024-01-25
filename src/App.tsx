@@ -102,7 +102,7 @@ function App() {
     setQuery('');
     setPlaylistName('');
     setPlaylistId('');
-    window.open('http://localhost:5173', '_self');
+    window.open('https://jammming-sepia.vercel.app/', '_self');
   };
 
   // Search Results Logic
